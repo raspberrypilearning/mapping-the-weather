@@ -1,7 +1,5 @@
-By creating a something with your Raspberry Pi you will learn:
+By learning how to map the weather, you will learn:
 
-- How to set up a Raspberry Pi camera
-- How to use GPIO pins
-- How to create a circuit on a breadboard
-- Controlling GPIO pins with Python code
-- Controlling the camera module with Python code
+- How to fetch data using a RESTful API
+- How to produce a variety of maps using Matplotlib
+- How to plot data points on a map
