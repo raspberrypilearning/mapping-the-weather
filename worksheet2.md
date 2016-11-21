@@ -123,3 +123,9 @@ You can now use `zip` in your code to combine the longitudes, latitudes and temp
 
 ![global](images/global_temp.png)
 ![uk](images/uk_temp.png)
+
+## What Next
+
+Why not try and plot some other sensor data - rainfall for instance.
+
+There is lots more functionality in matplotlib and basemap that you could explore. You could try and colour the plot points depending on the temperature for instance.
