@@ -29,7 +29,7 @@ For more information on using JSON and the RESTful API of the Raspberry Pi Weath
 
 1. Open a new Python shell by clicking on **Menu** > **Programming** > **Python 3 (IDLE)**. Then click **File** > **New File** to start a new script.
 
-1. To begin with you'll need to import a few Python modules. If you haven't installed them yet, you can find details on the [requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
+1. To begin with you'll need to import a few Python modules. If you haven't installed them yet, you can find details on the [Requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
 
     ``` python
     from requests import get
