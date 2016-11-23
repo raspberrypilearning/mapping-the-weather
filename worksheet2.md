@@ -31,7 +31,7 @@
     50.52, 'ambient_temp': 25.15}
     ```
 
-1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use a different sensor though, that's fine.
+1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use different data, like humidity, that's fine.
 
     ``` python
     lons = [data['weather_stn_long'] for data in station_data['items']]
