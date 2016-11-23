@@ -2,7 +2,7 @@
 
 ## Getting station and weather data
 
-1. Create a new Python file by clicking `File` > `New File`.
+1. Create a new Python file by clicking **File** > **New File**.
 1. You can then use the same imports that you used in [worksheet one](worksheet.md).
 
     ``` python
@@ -12,7 +12,7 @@
     import matplotlib.pyplot as plt
     ```
     
-1. This time, you're going to use a different URL to fetch the data. `getalllastmeasurement` will fetch data on all the weather stations, along with each ones last uploaded sensor reading.
+1. This time, you're going to use a different URL to fetch the data: `getalllastmeasurement` will fetch data on all the weather stations, along with each ones last uploaded sensor reading.
 
     ``` python
     url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getalllastmeasurement'
@@ -20,7 +20,7 @@
     station_data = get(url).json()
     ```
 
-1. If you type `station_data['items'][0]` into your Python shell after running your script, you'll see that there is lots of information provided by the RESTful API.
+1. If you type `station_data['items'][0]` into your Python shell after running your script, you'll see that there is a lot of information provided by the RESTful API.
 
     ``` json
     {'reading_timestamp': '2016-11-20T21:55:02Z', 'weather_stn_lat':
@@ -31,7 +31,7 @@
     50.52, 'ambient_temp': 25.15}
     ```
 
-1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use a different sensor though, that is fine.
+1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use a different sensor though, that's fine.
 
     ``` python
     lons = [data['weather_stn_long'] for data in station_data['items']]
@@ -41,7 +41,7 @@
 
 ## Setting up the map
 
-You can setup your map in more or less the same way you did in [worksheet one](worksheet.md). However, this time you can use the `bluemarble` colouring of the map, to add realism.
+You can set your map up in more or less the same way you did in [worksheet one](worksheet.md). However, this time you can use the `bluemarble` colouring of the map, to add realism.
 
 ``` python
 cc_lat = 55
@@ -85,7 +85,7 @@ Rather than plot the points in one go, this time you're going to use a loop to p
 
     `zip` groups the zeroth item of each list, then the first item of each list, then the second, and so on.
     
-You can now use `zip` in your code to combine the longitudes, latitudes and temperatures.
+You can now use `zip` in your code to combine the longitudes, latitudes, and temperatures.
 
 ## Plotting stations and temperatures.
 
@@ -119,13 +119,13 @@ You can now use `zip` in your code to combine the longitudes, latitudes and temp
     plt.show()
     ```
 
-1. Once you have run the script, you might find that the text labels are illegible, especially with so many stations in Europe. You can use the toolbar at the bottom of the map, to zoom to a particular rectangle though.
+1. Once you have run the script, you might find that the text labels are illegible, especially with so many stations in Europe. You can, however, use the toolbar at the bottom of the map to zoom to a particular rectangle.
 
 ![global](images/global_temp.png)
 ![uk](images/uk_temp.png)
 
 ## What Next
 
-Why not try and plot some other sensor data - rainfall for instance.
+- Why not try and plot some other sensor data. Rainfall could be a good place to start.
 
-There is lots more functionality in matplotlib and basemap that you could explore. You could try and colour the plot points depending on the temperature for instance.
+- Explore some of the other functionality in Matplotlib and Basemap. You could try and colour the plot points depending on the reported temperature for instance.
