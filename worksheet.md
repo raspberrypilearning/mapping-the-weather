@@ -8,16 +8,16 @@ Each weather station comes equipped with the sensors shown in the table below
 
 |Sensor Name|Purpose|
 |-----------|-------|
-|Rain Gauge|Measures the volume of rain falling in millimetres|
+|Rain gauge|Measures the volume of rain falling in millimetres|
 |Anemometer|Measures the wind speed in kilometres per hour|
-|Wind Vane|Measures the wind direction in degrees|
-|Soil Temperature probe|Measures the soil temperature in degrees Celsius|
+|Wind vane|Measures the wind direction in degrees|
+|Soil temperature probe|Measures the soil temperature in degrees Celsius|
 |Temperature sensor|Measures the air temperature in degrees Celsius|
-|Humidity Sensor|Measures the relative humidity of the air as a percentage|
-|Pressure Sensor|Measures the atmospheric pressure in Pascals
-|Air Quality Sensor|Measures the air quality as a relative percentage|
+|Humidity sensor|Measures the relative humidity of the air as a percentage|
+|Pressure sensor|Measures the atmospheric pressure in Pascals|
+|Air quality sensor|Measures the air quality as a relative percentage|
 
-The weather stations continually monitor the weather and then send their data to an Oracle database, where it is stored and can be accessed.
+The weather stations continually monitor the weather and then send their data to an Oracle database, where it is stored and from which it can be accessed.
 
 In this resource you will first fetch a list of the online weather stations, and then plot them onto a map of the world.
 
@@ -25,11 +25,11 @@ Then you can look at gathering some data from all the available weather stations
 
 ## Fetching the weather stations.
 
-For greater detail on using json and the RESTful API of the Raspberry Pi Weather Station Database, you can have a look over the resources - [Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the Weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
+For more information on using JSON and the RESTful API of the Raspberry Pi Weather Station Database, you can have a look over the resources - [Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the Weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
 
-1. Open a new Python shell by clicking on `Menu` > `Programming` > `Python 3 (IDLE)`. Then click `File` > `New File`, to start a new script.
+1. Open a new Python shell by clicking on **Menu** > **Programming** > **Python 3 (IDLE)**. Then click **File** > **New File** to start a new script.
 
-1. To begin with you'll need a few Python modules importing. If you haven't installed them yet, you can find details on the [requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
+1. To begin with you'll need to import a few Python modules. If you haven't installed them yet, you can find details on the [requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
 
     ``` python
     from requests import get
@@ -38,9 +38,9 @@ For greater detail on using json and the RESTful API of the Raspberry Pi Weather
     import matplotlib.pyplot as plt
     ```
 
-1. `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `Basemap` is a tool for creating maps in Python, and `matplotlib` allows the plotting of points to the map.
+1. Here, `requests` is used to fetch the JSON data from the database, `json` is used to process JSON data. `Basemap` is a tool for creating maps in Python, and `matplotlib` allows the plotting of points to the map.
 
-1. The URL for the RESTful API needs to be stored as a string in your program next.
+1. Next, the URL for the RESTful API needs to be stored as a string in your program.
 
     ``` python
     url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
@@ -52,7 +52,7 @@ For greater detail on using json and the RESTful API of the Raspberry Pi Weather
     stations = get(url).json()
     ```
 
-1. Save and run this file, to fetch the data. You can examine the data by typing the following into the Python shell.
+1. Save and run this file to fetch the data. You can examine the data by typing the following into the Python shell:
 
     ``` python
     stations['items'][0]
@@ -64,26 +64,26 @@ For greater detail on using json and the RESTful API of the Raspberry Pi Weather
     {'weather_stn_name': 'Pi Towers Demo', 'weather_stn_id': 255541, 'weather_stn_long': 0.110421, 'weather_stn_lat': 52.213842}
     ```
 
-1. This is the first record in the JSON data. As you can see, the stations longitude and latitude are within the dictionary. If you want to learn a little more about longitudes and latitudes, then have a look at the [second worksheet from Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/worksheet2) These are easy enough to access. For instance, you could type this into the shell.
+1. This is the first record in the JSON data. As you can see, the station's longitude and latitude are within the dictionary. If you want to learn a little more about longitude and latitude, then have a look at the [second worksheet from Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/worksheet2). These values are straightforward to access. For instance, you could type this into the shell:
 
     ``` python
     stations['items'][0]['weather_stn_long']
     ```
 
-    or, if you wanted to see a different station:
+    or, if you wanted to see a different station, type the following:
 
     ``` python
     stations['items'][5]['weather_stn_long']
     ```
 
-1. Two list comprehensions can be used in your Python file to fetch all the longitudes and latitudes. These iterate over the JSON data and extract each of the longitudes and latitudes and place them in separate lists.
+1. Two list comprehensions can be used in your Python file to fetch all the longitude and latitude values. These iterate over the JSON data and extract each of the longitudes and latitudes and place them in separate lists.
 
     ``` python
     lons = [station['weather_stn_long'] for station in stations['items']]
     lats = [station['weather_stn_lat'] for station in stations['items']]
     ```
     
-1. You can run your file now, and then in the shell you can have a look at all the longitudes and latitudes by typing:
+1. You can run your file now; you can have a look at all the longitudes and latitudes by typing the following in the shell:
 
 ``` python
 lons
@@ -92,7 +92,7 @@ lats
 
 ## Creating a map
 
-1. To begin, you can start by defining where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the Prime Meridian and the Equator - longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
+1. To begin, you can start by defining where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the prime meridian and the equator, at longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
 
     ``` python
     cc_lat = 0
