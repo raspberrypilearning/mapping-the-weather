@@ -4,7 +4,7 @@ One thousand weather stations were sent out to schools all over the world, at th
 
 ![weather station](images/weather_station.jpg)
 
-Each weather station comes equipped with the sensors, shown in the table below
+Each weather station comes equipped with the sensors shown in the table below
 
 |Sensor Name|Purpose|
 |-----------|-------|
@@ -19,7 +19,7 @@ Each weather station comes equipped with the sensors, shown in the table below
 
 The weather stations continually monitor the weather and then send their data to an Oracle database, where it is stored and can be accessed.
 
-In this resource you're going to first fetch a list of the online weather stations, and then plot them onto a map of the world.
+In this resource you will first fetch a list of the online weather stations, and then plot them onto a map of the world.
 
 Then you can look at gathering some data from all the available weather stations and plotting some weather data to the map.
 
