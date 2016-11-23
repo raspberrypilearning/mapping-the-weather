@@ -120,9 +120,9 @@ lats
 
 ## Adding some more detail
 
-The `Basemap` module is very powerful, and there's lots that you can do to improve your map.
+The Basemap module is very powerful, and there's lots that you can do to improve your map.
 
-1. First of all, have a play with the different projections that are available in the `Basemap` module. There's a list of them below.
+1. First of all, have a play with the different projections that are available in the Basemap module. There's a list of them below.
 
    |      Basemap syntax |  Projection Name|
    |---------------------|-----------------|
