@@ -120,7 +120,7 @@ lats
 
 ## Adding some more detail
 
-`Basemap` is a powerful module, and there's lots that you can do to improve your map.
+The `Basemap` module is very powerful, and there's lots that you can do to improve your map.
 
 1. First of all, have a play with the different projections that are available in the `Basemap` module. There's a list of them below.
 
@@ -196,7 +196,7 @@ lats
     
 ## Plotting stations.
 
-1. Now that you have the map, the way you like it, you can plot all the locations of the weather stations. These lines need to go *before* the `plt.show()` line.
+1. Now that you have the map, the way you like it, you can plot all the locations of the weather stations. These lines need to go **before** the `plt.show()` line.
 
     ``` python
     x,y = my_map(lons, lats)
@@ -211,7 +211,7 @@ lats
     my_map.plot(x, y, 'ro', markersize=12)
     ```
 
-1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitudes of the upper right and lower left corners. Here the map is centred on the UK, additions and subtractions made to the centre position to position the corners.
+1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitudes of the upper right and lower left corners. Here the map is centred on the UK, with additions and subtractions made to the centre position to position the corners.
 
 ``` python
 cc_lat = 55
