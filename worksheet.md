@@ -1,6 +1,6 @@
 # Mapping the Weather
 
-One thousand weather stations were sent out to schools all over the world, at the beginning of 2016, ready to be assembled and begin collecting global weather data.
+One thousand weather stations were sent out to schools all over the world at the beginning of 2016, ready to be assembled and begin collecting global weather data.
 
 ![weather station](images/weather_station.jpg)
 
