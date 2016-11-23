@@ -21,7 +21,7 @@ The weather stations continually monitor the weather and then send their data to
 
 In this resource you will first fetch a list of the online weather stations, and then plot them onto a map of the world.
 
-Then you can look at gathering some data from all the available weather stations and plotting some weather data to the map.
+Then you can look at gathering data from all the available weather stations and plotting it to the map.
 
 ## Fetching the weather stations.
 
