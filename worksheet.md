@@ -25,7 +25,7 @@ Then you can look at gathering some data from all the available weather stations
 
 ## Fetching the weather stations.
 
-For more information on using JSON and the RESTful API of the Raspberry Pi Weather Station Database, you can have a look over the resources - [Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the Weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
+For more information on using JSON and the RESTful API of the Raspberry Pi Weather Station Database, you can have a look over these resources: [Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the Weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
 
 1. Open a new Python shell by clicking on **Menu** > **Programming** > **Python 3 (IDLE)**. Then click **File** > **New File** to start a new script.
 
