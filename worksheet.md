@@ -70,7 +70,7 @@ For more information on using JSON and the RESTful API of the Raspberry Pi Weath
     stations['items'][0]['weather_stn_long']
     ```
 
-    or, if you wanted to see a different station, type the following:
+    If you wanted to see a different station, type the following:
 
     ``` python
     stations['items'][5]['weather_stn_long']
