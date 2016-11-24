@@ -69,25 +69,25 @@ Rather than plot the points in one go, this time you're going to use a loop to p
     ages = ['3', '6', '2']
     ```
 
-1. Now images you wanted to print out the pet's types, names and ages, grouping them all together. You could write code that looks like this:
+1. Now imagine you wanted to print out the pets' types, names, and ages, grouping them all together. You could write code that looks like this:
 
     ``` python
     for i in range(len(pets)):
         print(pets[i], names[i], ages[i])
     ```
 
-    but Python has a special function called `zip` that creates a new object that can be iterated over using a `for` loop. Try writing this in the shell
+    Python does, however, have a special function called `zip` that creates a new object that can be iterated over using a `for` loop. Try writing this in the shell
 
     ``` python
     for i in zip(pets, names, ages):
         print(i)
     ```
 
-    `zip` groups the zeroth item of each list, then the first item of each list, then the second, and so on.
+    Here, `zip` groups the zeroth item of each list, then the first item of each list, then the second, and so on.
     
 You can now use `zip` in your code to combine the longitudes, latitudes, and temperatures.
 
-## Plotting stations and temperatures.
+## Plotting stations and temperatures
 
 1. Start by using a `for` loop to iterate over the zipped data.
 
@@ -101,13 +101,13 @@ You can now use `zip` in your code to combine the longitudes, latitudes, and tem
         x,y = my_map(lon, lat)
     ```
 
-1. Then you can plot the stations. This time you can set the colour using a tuple. Matplotlib uses a tuple of values for red, green and blue, with each value being between 0 and 1.
+1. Then you can plot the stations. This time you can set the colour using a tuple. Matplotlib uses a tuple of values for red, green, and blue, with each value being between 0 and 1.
 
     ``` python
         my_map.plot(x, y, 'o', markersize=10, color=(0,0,1))
     ```
 
-1. To finish off, you can plot the temperatures with the stations. Here they are being plotted in white text, with a `right` horizontal alignment and a `bottom` vertical alignment.
+1. To finish off, you can plot the temperatures with the stations. Here they are plotted in white text, with a `right` horizontal alignment and a `bottom` vertical alignment.
 
     ``` python
         plt.text(x, y, temp, color = 'w', ha='right',va='bottom')
@@ -119,13 +119,13 @@ You can now use `zip` in your code to combine the longitudes, latitudes, and tem
     plt.show()
     ```
 
-1. Once you have run the script, you might find that the text labels are illegible, especially with so many stations in Europe. You can, however, use the toolbar at the bottom of the map to zoom to a particular rectangle.
+1. Once you have run the script, you might find that the text labels are too closely packed to be legible, especially with so many stations in Europe. You can, however, use the toolbar at the bottom of the map to zoom to a particular rectangle.
 
 ![global](images/global_temp.png)
 ![uk](images/uk_temp.png)
 
 ## What Next
 
-- Why not try and plot some other sensor data. Rainfall could be a good place to start.
+- Why not try and plot some other sensor data? Rainfall could be a good place to start.
 
 - Explore some of the other functionality in Matplotlib and Basemap. You could try and colour the plot points depending on the reported temperature for instance.
