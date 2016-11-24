@@ -58,7 +58,7 @@ For more information on using JSON and the RESTful API of the Raspberry Pi Weath
     stations['items'][0]
     ```
 
-1. You should see something like the following, printed out in the shell.
+1. You should see something like the following printed out in the shell:
 
     ``` python
     {'weather_stn_name': 'Pi Towers Demo', 'weather_stn_id': 255541, 'weather_stn_long': 0.110421, 'weather_stn_lat': 52.213842}
