@@ -95,7 +95,7 @@ You can now use `zip` in your code to combine the longitudes, latitudes, and tem
     for lon, lat, temp in zip(lons, lats, temps):
     ```
 
-1. Into this for loop, you set the positions of each station.
+1. Into this `for` loop, you set the positions of each station.
 
     ``` python
         x,y = my_map(lon, lat)
