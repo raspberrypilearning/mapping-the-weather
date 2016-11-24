@@ -205,7 +205,7 @@ The Basemap module is very powerful, and there's lots that you can do to improve
 
     ![stations](images/stations_map.png)
     
-1. You can also alter the colour and style of your markers
+1. You can also alter the colour and style of your markers:
 
     ``` python
     my_map.plot(x, y, 'ro', markersize=12)
