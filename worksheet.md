@@ -211,7 +211,7 @@ The Basemap module is very powerful, and there's lots that you can do to improve
     my_map.plot(x, y, 'ro', markersize=12)
     ```
 
-1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitudes of the upper right and lower left corners. Here the map is centred on the UK, with additions and subtractions made to the centre position to position the corners.
+1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitude of the upper right and lower left corners. Here the map is centred on the UK, with additions and subtractions made to the centre position to position the corners.
 
 ``` python
 cc_lat = 55
