@@ -23,7 +23,7 @@ In this resource you will first fetch a list of the online weather stations, and
 
 You can then look at gathering data from all the available weather stations and plotting it to the map.
 
-## Fetching the weather stations.
+## Fetching the weather stations
 
 For more information on using JSON and the RESTful API of the Raspberry Pi Weather Station Database, you can have a look over these resources: [Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the Weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
 
@@ -194,7 +194,7 @@ The Basemap module is very powerful, and there's lots that you can do to improve
     
     ![color](images/color_map.png)
     
-## Plotting stations.
+## Plotting stations
 
 1. Now that you have the map, the way you like it, you can plot all the locations of the weather stations. These lines need to go **before** the `plt.show()` line.
 
