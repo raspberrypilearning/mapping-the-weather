@@ -92,7 +92,7 @@ lats
 
 ## Creating a map
 
-1. To begin, you can start by defining where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the prime meridian and the equator, at longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
+1. You can start by defining where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the prime meridian and the equator, at longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
 
     ``` python
     cc_lat = 0
