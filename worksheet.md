@@ -19,7 +19,7 @@ Each weather station comes equipped with the sensors shown in the table below:
 
 The weather stations continually monitor the weather and then send their data to an Oracle database, where it is stored and from which it can be accessed.
 
-In this resource you will first fetch a list of the online weather stations, and then plot them onto a map of the world.
+In this resource you will first fetch a list of the online weather stations, and then plot them on a map of the world.
 
 Then you can look at gathering data from all the available weather stations and plotting it to the map.
 
