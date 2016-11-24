@@ -171,7 +171,7 @@ The Basemap module is very powerful, and there's lots that you can do to improve
 
     ![full resolution](images/full_res.png)
     
-    But rendering in such high detail can take a **long** time, especially if you are on a Raspberry Pi.
+    Remember, though, that rendering in such high detail can take a **long** time, especially if you are on a Raspberry Pi.
     
 1. As well as drawing coastlines, there are other features that can be drawn. Try adding any or all of the following lines.
 
