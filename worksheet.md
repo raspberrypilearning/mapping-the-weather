@@ -144,7 +144,7 @@ The Basemap module is very powerful, and there's lots that you can do to improve
    |      cea            |  Cylindrical Equal Area                  |
    |      kav7           |  Kavrayskiy |
 
-1. So, for instance;
+1. So, for instance,
 
     ``` python
     my_map = Basemap(projection='geos', lat_0 = cc_lat, lon_0 = cc_lon,
