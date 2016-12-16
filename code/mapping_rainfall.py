@@ -11,7 +11,7 @@ print('got data')
 lons = [data['weather_stn_long'] for data in station_data['items']]
 lats = [data['weather_stn_lat'] for data in station_data['items']]
 temps = [data['ambient_temp'] for data in station_data['items']]
-print('porcessed data')
+print('processed data')
 cc_lat = 55
 cc_lon = 0
 
