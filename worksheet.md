@@ -38,27 +38,27 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     import matplotlib.pyplot as plt
     ```
 
-1. `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `Basemap` is a tool for creating maps in Python, and `matplotlib` allows the plotting of points to the map.
+1. Here, `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `Basemap` is a tool for creating maps in Python, and `matplotlib` allows the plotting of points to the map.
 
-1. The URL for the RESTful API needs to be stored as a string in your program next.
+1. Next, the URL for the RESTful API needs to be stored as a string in your program.
 
     ``` python
     url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
     ```
 
-1. Then the JSON data can be fetched.
+1. The JSON data can then be fetched.
 
     ``` python
     stations = get(url).json()
     ```
 
-1. Save and run this file to fetch the data. You can examine the data by typing the following into the Python shell.
+1. Save and run this file to fetch the data. You can examine the data by typing the following into the Python shell:
 
     ``` python
     stations['items'][0]
     ```
 
-1. You should see something like the following printed out in the shell:
+1. You should see something like this printed out in the shell:
 
     ``` python
     {'weather_stn_name': 'Pi Towers Demo', 'weather_stn_id': 255541, 'weather_stn_long': 0.110421, 'weather_stn_lat': 52.213842}
@@ -92,7 +92,7 @@ lats
 
 ## Creating a map
 
-1. To begin, you can start by defining where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the Prime Meridian and the Equator - longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
+1. To begin, you can define where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the Prime Meridian and the Equator: longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
 
     ``` python
     cc_lat = 0
@@ -171,9 +171,9 @@ lats
 
     ![full resolution](images/full_res.png)
     
-    But rendering in such high detail can take a **long** time, especially if you are on a Raspberry Pi.
+    Not that rendering in such high detail can take a **long** time, especially if you are on a Raspberry Pi.
     
-1. As well as drawing coastlines, there are other features that can be drawn. Try adding any or all of the following lines.
+1. As well as coastlines, there are other features that can be drawn. Try adding any or all of the following lines.
 
     ``` python
     my_map.drawcoastlines()
@@ -196,7 +196,7 @@ lats
     
 ## Plotting stations.
 
-1. Now that you have the map, the way you like it, you can plot all the locations of the weather stations. These lines need to go *before* the `plt.show()` line.
+1. Now that you have the map, the way you like it, you can plot all the locations of the Weather Wtations. These lines need to go **before** the `plt.show()` line.
 
     ``` python
     x,y = my_map(lons, lats)
@@ -205,7 +205,7 @@ lats
 
     ![stations](images/stations_map.png)
     
-1. You can also alter the colour and style of your markers
+1. You can also alter the colour and style of your markers:
 
     ``` python
     my_map.plot(x, y, 'ro', markersize=12)
