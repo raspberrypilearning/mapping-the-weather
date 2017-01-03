@@ -2,7 +2,7 @@
 
 ## Getting station and weather data
 
-1. Create a new Python file by clicking `File` > `New File`.
+1. Create a new Python file by clicking **File** > **New File**.
 1. You can then use the same imports that you used in [worksheet one](worksheet.md).
 
     ``` python
@@ -14,13 +14,14 @@
     
 1. This time, you're going to use a different URL to fetch the data. `getalllastmeasurement` will fetch data on all the Weather Stations, along with each one's last uploaded sensor reading.
 
+
     ``` python
     url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getalllastmeasurement'
 
     station_data = get(url).json()
     ```
 
-1. If you type `station_data['items'][0]` into your Python shell after running your script, you'll see that there is lots of information provided by the RESTful API.
+1. If you type `station_data['items'][0]` into your Python shell after running your script, you'll see that there is a lot of information provided by the RESTful API.
 
     ``` json
     {'reading_timestamp': '2016-11-20T21:55:02Z', 'weather_stn_lat':
@@ -31,7 +32,7 @@
     50.52, 'ambient_temp': 25.15}
     ```
 
-1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use a different sensor though, that is fine.
+1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use different data, though, that's fine.
 
     ``` python
     lons = [data['weather_stn_long'] for data in station_data['items']]
@@ -71,7 +72,7 @@ Rather than plot the points in one go, this time you're going to use a loop to p
     ages = ['3', '6', '2']
     ```
 
-1. Now images you wanted to print out the pet's types, names and ages, grouping them all together. You could write code that looks like this:
+1. Now imagine you wanted to print out the pets' types, names, and ages, grouping them all together. You could write code that looks like this:
 
     ``` python
     for i in range(len(pets)):
@@ -80,16 +81,17 @@ Rather than plot the points in one go, this time you're going to use a loop to p
 
     However, Python has a special function called `zip` that creates a new object which can be iterated over using a `for` loop. Try writing this in the shell:
 
+
     ``` python
     for i in zip(pets, names, ages):
         print(i)
     ```
 
-    `zip` groups the zeroth item of each list, then the first item of each list, then the second, and so on.
+    Here, `zip` groups the zeroth item of each list, then the first item of each list, then the second, and so on.
     
-You can now use `zip` in your code to combine the longitudes, latitudes and temperatures.
+You can now use `zip` in your code to combine the longitudes, latitudes, and temperatures.
 
-## Plotting stations and temperatures.
+## Plotting stations and temperatures
 
 You only need to plot the Weather Stations that are going to be visible on your map.
 
@@ -106,7 +108,8 @@ You only need to plot the Weather Stations that are going to be visible on your 
 		if lon => cc_lon-15 and lon =< cc_lon+5 and lat => cc_lat-7 and lat =< cc_lat+5:
 	```
 
-1. Into this for loop, you set the positions of each station.
+1. Into this `for` loop, you set the positions of each station.
+
 
     ``` python
         x,y = my_map(lon, lat)
@@ -118,7 +121,7 @@ You only need to plot the Weather Stations that are going to be visible on your 
         my_map.plot(x, y, 'o', markersize=10, color=(0,0,1))
     ```
 
-1. To finish off, you can plot the temperatures with the stations. Here they are being plotted in white text, with a `right` horizontal alignment and a `bottom` vertical alignment.
+1. To finish off, you can plot the temperatures with the stations. Here they are plotted in white text, with a `right` horizontal alignment and a `bottom` vertical alignment.
 
     ``` python
         plt.text(x, y, temp, color = 'w', ha='right',va='bottom')
@@ -149,3 +152,4 @@ for lon, lat, temp in zip(lons, lats, temps):
 Why not try and plot some other sensor data, like rainfall? 
 
 There is a lot more functionality in Matplotlib and Basemap that you could explore. You could, for example, try and colour the plot points depending on the temperature.
+

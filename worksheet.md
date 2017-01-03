@@ -23,13 +23,15 @@ In this resource you're first going to fetch a list of the online Weather Statio
 
 You can then look at gathering some data from all the available Weather Stations and plotting that weather data to the map.
 
-## Fetching the weather stations.
+
+## Fetching the weather stations
 
 For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather Station database, you can have a look over the resources - [Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the Weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
 
-1. Open a new Python shell by clicking on `Menu` > `Programming` > `Python 3 (IDLE)`. Then click `File` > `New File`, to start a new script.
+1. Open a new Python shell by clicking on **Menu** > **Programming** > **Python 3 (IDLE)**. Then click **File** > **New File** to start a new script.
 
 1. To begin with you'll need to import a few Python modules. If you haven't installed them yet, you can find details on the [requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
+
 
     ``` python
     from requests import get
@@ -37,7 +39,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     from mpl_toolkits.basemap import Basemap
     import matplotlib.pyplot as plt
     ```
-
+    
 1. Here, `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `Basemap` is a tool for creating maps in Python, and `matplotlib` allows the plotting of points to the map.
 
 1. Next, the URL for the RESTful API needs to be stored as a string in your program.
@@ -60,11 +62,13 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
 
 1. You should see something like this printed out in the shell:
 
+
     ``` python
     {'weather_stn_name': 'Pi Towers Demo', 'weather_stn_id': 255541, 'weather_stn_long': 0.110421, 'weather_stn_lat': 52.213842}
     ```
 
 1. This is the first record in the JSON data. As you can see, the station's longitude and latitude are within the dictionary. If you want to learn a little more about longitudes and latitudes, then have a look at the [second worksheet from Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/worksheet2) These are easy enough to access. For instance, you could type this into the shell:
+
 
     ``` python
     stations['items'][0]['weather_stn_long']
@@ -72,18 +76,19 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
 
     If you wanted to see a different station, you could type this:
 
+
     ``` python
     stations['items'][5]['weather_stn_long']
     ```
 
-1. Two list comprehensions can be used in your Python file to fetch all the longitudes and latitudes. These iterate over the JSON data and extract each of the longitudes and latitudes and place them in separate lists.
+1. Two list comprehensions can be used in your Python file to fetch all the longitude and latitude values. These iterate over the JSON data and extract each of the longitudes and latitudes and place them in separate lists.
 
     ``` python
     lons = [station['weather_stn_long'] for station in stations['items']]
     lats = [station['weather_stn_lat'] for station in stations['items']]
     ```
     
-1. You can run your file now, and then in the shell you can have a look at all the longitudes and latitudes by typing:
+1. You can run your file now; you can have a look at all the longitudes and latitudes by typing the following in the shell:
 
 ``` python
 lons
@@ -93,6 +98,7 @@ lats
 ## Creating a map
 
 1. To begin, you can define where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the Prime Meridian and the Equator: longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
+
 
     ``` python
     cc_lat = 0
@@ -120,9 +126,9 @@ lats
 
 ## Adding some more detail
 
-`Basemap` is a powerful module, and there's lots that you can do to improve your map.
+The Basemap module is very powerful, and there's lots that you can do to improve your map.
 
-1. First of all, have a play with the different projections that are available in the `Basemap` module. There's a list of them below.
+1. First of all, have a play with the different projections that are available in the Basemap module. There's a list of them below.
 
    |      Basemap syntax |  Projection Name|
    |---------------------|-----------------|
@@ -144,7 +150,7 @@ lats
    |      cea            |  Cylindrical Equal Area                  |
    |      kav7           |  Kavrayskiy |
 
-1. For instance;
+1. So, for instance,
 
     ``` python
     my_map = Basemap(projection='geos', lat_0 = cc_lat, lon_0 = cc_lon,
@@ -154,7 +160,7 @@ lats
 
    ![](images/geos_map.png)
 
-1. You can also adjust your resolution, as it will accept any of the following flags.
+1. You can also adjust your resolution, as Basemap will accept any of the following flags.
 
     |Flag|Result|
     |----|------|
@@ -171,8 +177,9 @@ lats
 
     ![full resolution](images/full_res.png)
     
+
     Not that rendering in such high detail can take a **long** time, especially if you are on a Raspberry Pi.
-    
+ 
 1. As well as coastlines, there are other features that can be drawn. Try adding any or all of the following lines.
 
     ``` python
@@ -194,9 +201,10 @@ lats
     
     ![color](images/color_map.png)
     
-## Plotting stations.
+## Plotting stations
 
 1. Now that you have the map, the way you like it, you can plot all the locations of the Weather Wtations. These lines need to go **before** the `plt.show()` line.
+
 
     ``` python
     x,y = my_map(lons, lats)
@@ -211,7 +219,7 @@ lats
     my_map.plot(x, y, 'ro', markersize=12)
     ```
 
-1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitudes of the upper right and lower left corners. Here the map is centred on the UK, additions and subtractions made to the centre position to position the corners.
+1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitude of the upper right and lower left corners. Here the map is centred on the UK, with additions and subtractions made to the centre position to position the corners.
 
 ``` python
 cc_lat = 55
