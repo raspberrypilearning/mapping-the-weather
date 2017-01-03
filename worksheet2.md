@@ -12,7 +12,8 @@
     import matplotlib.pyplot as plt
     ```
     
-1. This time, you're going to use a different URL to fetch the data: `getalllastmeasurement` will fetch data on all the weather stations, along with each ones last uploaded sensor reading.
+1. This time, you're going to use a different URL to fetch the data. `getalllastmeasurement` will fetch data on all the Weather Stations, along with each one's last uploaded sensor reading.
+
 
     ``` python
     url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getalllastmeasurement'
@@ -41,14 +42,16 @@
 
 ## Setting up the map
 
-You can set your map up in more or less the same way you did in [worksheet one](worksheet.md). However, this time you can use the `bluemarble` colouring of the map, to add realism.
+You can set your map up in more or less the same way you did in [worksheet one](worksheet.md). The settings used below will focus on the UK, but you can adjust you `cc_lat` and `cc_lon` to your own liking. Trying to render the whole globe would cause your program to crash, though, as the Raspberry Pi does not have enough memory to accomplish such a task.
 
 ``` python
 cc_lat = 55
 cc_lon = 0
 
-my_map = Basemap(projection='robin', lat_0 = cc_lat, lon_0 = cc_lon,
-                 resolution = 'l')
+my_map = Basemap(projection='merc', lat_0 = cc_lat, lon_0 = cc_lon,
+                 resolution = 'h' , area_thresh = 1,
+                 llcrnrlon=cc_lon-15, llcrnrlat=cc_lat-7,
+                 urcrnrlon=cc_lon+5, urcrnrlat=cc_lat+5)
 
 my_map.drawcoastlines()
 my_map.drawcountries()
@@ -59,7 +62,7 @@ my_map.bluemarble()
 
 ## Zipping in Python
 
-Rather than plot the points in one go, this time you're going to use a loop to plot each point and then add a label to it. To do this it is helpful to use Python's inbuilt `zip` function. To understand how `zip` works, you can play around a little in the shell.
+Rather than plot the points in one go, this time you're going to use a loop to plot each point and then add a label to it. To do this, it is helpful to use Python's inbuilt `zip` function. To understand how `zip` works, you can play around a little in the shell.
 
 1. In the shell, type the following lines to create three different lists:
 
@@ -76,7 +79,8 @@ Rather than plot the points in one go, this time you're going to use a loop to p
         print(pets[i], names[i], ages[i])
     ```
 
-    Python does, however, have a special function called `zip` that creates a new object that can be iterated over using a `for` loop. Try writing this in the shell
+    However, Python has a special function called `zip` that creates a new object which can be iterated over using a `for` loop. Try writing this in the shell:
+
 
     ``` python
     for i in zip(pets, names, ages):
@@ -89,13 +93,23 @@ You can now use `zip` in your code to combine the longitudes, latitudes, and tem
 
 ## Plotting stations and temperatures
 
+You only need to plot the Weather Stations that are going to be visible on your map.
+
 1. Start by using a `for` loop to iterate over the zipped data.
 
     ``` python
     for lon, lat, temp in zip(lons, lats, temps):
     ```
 
+1. Let's just get the Weather Stations within the longitudes and latitudes your map will cover.
+                 llcrnrlon=cc_lon-15, llcrnrlat=cc_lat-7,
+                 urcrnrlon=cc_lon+5, urcrnrlat=cc_lat+5)
+	```python
+		if lon => cc_lon-15 and lon =< cc_lon+5 and lat => cc_lat-7 and lat =< cc_lat+5:
+	```
+
 1. Into this `for` loop, you set the positions of each station.
+
 
     ``` python
         x,y = my_map(lon, lat)
@@ -119,13 +133,23 @@ You can now use `zip` in your code to combine the longitudes, latitudes, and tem
     plt.show()
     ```
 
-1. Once you have run the script, you might find that the text labels are too closely packed to be legible, especially with so many stations in Europe. You can, however, use the toolbar at the bottom of the map to zoom to a particular rectangle.
+1. The last part of your code should now look like this:
 
-![global](images/global_temp.png)
+```python
+for lon, lat, temp in zip(lons, lats, temps):
+    if lon >= cc_lon-15 and lon <= cc_lon+5 and lat >= cc_lat-7 and lat <= cc_lat+5:
+        x,y = my_map(lon, lat)
+        my_map.plot(x, y, 'o', markersize=10, color=(0,0,1))
+        plt.text(x, y, temp, color = 'w', ha='right',va='bottom')
+```
+
+1. Run your code and you should see your map.
+
 ![uk](images/uk_temp.png)
 
 ## What Next
 
-- Why not try and plot some other sensor data? Rainfall could be a good place to start.
+Why not try and plot some other sensor data, like rainfall? 
 
-- Explore some of the other functionality in Matplotlib and Basemap. You could try and colour the plot points depending on the reported temperature for instance.
+There is a lot more functionality in Matplotlib and Basemap that you could explore. You could, for example, try and colour the plot points depending on the temperature.
+
