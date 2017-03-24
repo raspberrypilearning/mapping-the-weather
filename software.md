@@ -3,7 +3,7 @@
 To install the software you need, run the following commands in a terminal window:
 
 ```bash
-sudo apt-get install python3-requests python3-matplotlib
+sudo apt-get -y install python3-requests python3-matplotlib
 wget https://github.com/matplotlib/basemap/archive/v1.0.7rel.tar.gz
 tar -xvf v1.0.7rel.tar.gz 
 cd basemap-1.0.7rel/
