@@ -30,17 +30,17 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
 
 1. Open a new Python shell by clicking on **Menu** > **Programming** > **Python 3 (IDLE)**. Then click **File** > **New File** to start a new script.
 
-1. To begin with you'll need to import a few Python modules. If you haven't installed them yet, you can find details on the [requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
+1. To begin with you'll need to import a Python module. If you haven't installed it yet, you can find details on the [requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
 
 
     ``` python
     from requests import get
     import json
-    from mpl_toolkits.basemap import Basemap
-    import matplotlib.pyplot as plt
+    import folium
+    import os
     ```
-    
-1. Here, `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `Basemap` is a tool for creating maps in Python, and `matplotlib` allows the plotting of points to the map.
+
+1. Here, `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `folium` is a tool for visualising data on maps in Python.
 
 1. Next, the URL for the RESTful API needs to be stored as a string in your program.
 
@@ -81,154 +81,72 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     stations['items'][5]['weather_stn_long']
     ```
 
-1. Two list comprehensions can be used in your Python file to fetch all the longitude and latitude values. These iterate over the JSON data and extract each of the longitudes and latitudes and place them in separate lists.
+1. Three list comprehensions can be used in your Python file to fetch all the longitude and latitude values along with the names of the weather stations. These iterate over the JSON data and extract each of the longitudes, latitudes and names and place them in separate lists.
 
     ``` python
     lons = [station['weather_stn_long'] for station in stations['items']]
     lats = [station['weather_stn_lat'] for station in stations['items']]
+    wsnames = [station['weather_stn_name']] for station in stations['items']]
     ```
-    
-1. You can run your file now; you can have a look at all the longitudes and latitudes by typing the following in the shell:
+
+1. You can run your file now; you can have a look at all the weather station names by typing the following in the shell:
 
 ``` python
-lons
-lats
+wsnames
 ```
 
 ## Creating a map
 
-1. To begin, you can define where your map will be centred. For the purposes of this resource, the code will reflect a centre that is on the intersection of the Prime Meridian and the Equator: longitude 0 and latitude 0. You could centre your map at the longitude and latitude of your own location if you prefer.
 
-
-    ``` python
-    cc_lat = 0
-    cc_lon = 0
-    ```
-
-1. The next thing to do is to set up your map.
+1. The first thing to do is to set up your map.
 
     ``` python
-    my_map = Basemap(projection='robin', lat_0 = cc_lat, lon_0 = cc_lon,
-                     resolution = 'l')
+    map_ws = folium.Map(location=[0,0],zoom_start=2)
     ```
 
-1. This creates a map with a `robin` projection, centred at 0, 0. The map will have a low resolution.
+1. This creates a map with centred at latitude 0, longitude 0.
 
-1. To finish off drawing a basic map, you need two more lines. The first will draw the coastlines of all the continents and the second will render the map.
+1. Finally you need to save your map into a local html file and then open it using a web-browser. Python's `os` library is used to discover the Current Working Directory (CWD) so that the web-browser knows from where to load the saved map file
 
     ``` python
-    my_map.drawcoastlines()
-    plt.show()
+    CWD = os.getcwd()
+    map_ws.save('wsmap1.html')
+    webbrowser.open_new('file://'+CWD+'/'+'wsmap1.html')
     ```
-1. Save and run your file, and a new window should open up, displaying a map of the globe.
+
+1. Save and run your file, and a new browser window should open up, displaying a map of the globe. 
 
 ![basic map](images/basic_map.png)
 
-## Adding some more detail
 
-The Basemap module is very powerful, and there's lots that you can do to improve your map.
-
-1. First of all, have a play with the different projections that are available in the Basemap module. There's a list of them below.
-
-   |      Basemap syntax |  Projection Name|
-   |---------------------|-----------------|
-   |      aeqd           |  Azimuthal Equidistant                   |
-   |      gall           |  Gall Stereographic Cylindrical          |
-   |      merc           |  Mercator                                |
-   |      moll           |  Mollweide                               |
-   |      nsper          |  Near-Sided Perspective                  |
-   |      mill           |  Miller Cylindrical                      |
-   |      cyl            |  Cylindrical Equidistant                 |
-   |      mbtfpq         |  McBryde-Thomas Flat-Polar Quartic       |
-   |      eck4           |  Eckert IV                               |
-   |      geos           |  Geostationary                           |
-   |      vandg          |  van der Grinten                         |
-   |      ortho          |  Orthographic                            |
-   |      hammer         |  Hammer                                  |
-   |      sinu           |  Sinusoidal                              |
-   |      robin          |  Robinson                                |
-   |      cea            |  Cylindrical Equal Area                  |
-   |      kav7           |  Kavrayskiy |
-
-1. So, for instance,
-
-    ``` python
-    my_map = Basemap(projection='geos', lat_0 = cc_lat, lon_0 = cc_lon,
-                     resolution = 'l')
-    ```
-    gives the following
-
-   ![](images/geos_map.png)
-
-1. You can also adjust your resolution, as Basemap will accept any of the following flags.
-
-    |Flag|Result|
-    |----|------|
-    |c|crude|
-    |l|low|
-    |i|intermediate|
-    |h|high|
-    |f|full|
-    
-    ``` python
-    my_map = Basemap(projection='robin', lat_0 = cc_lat, lon_0 = cc_lon,
-                     resolution = 'f')
-    ```
-
-    ![full resolution](images/full_res.png)
-    
-
-    Not that rendering in such high detail can take a **long** time, especially if you are on a Raspberry Pi.
- 
-1. As well as coastlines, there are other features that can be drawn. Try adding any or all of the following lines.
-
-    ``` python
-    my_map.drawcoastlines()
-    my_map.drawcountries()
-    my_map.drawstates()
-    my_map.drawmapboundary()
-    my_map.drawrivers()
-    ```
-    
-    ![](images/rivers_map.png)
-    
-1. You can also add colour to your map, to make it look a little less plain.
-
-    ``` python
-    my_map.drawmapboundary(fill_color='aqua')
-    my_map.fillcontinents(color='green',lake_color='aqua')
-    ```
-    
-    ![color](images/color_map.png)
-    
 ## Plotting stations
 
-1. Now that you have the map, the way you like it, you can plot all the locations of the Weather Wtations. These lines need to go **before** the `plt.show()` line.
+1. Now that you have the map, the way you like it, you can add all the locations of the Weather Stations. These lines need to go **before** the `map_ws.save` line. If you click on a marker, it should show the name of the Weather Station.
 
 
     ``` python
-    x,y = my_map(lons, lats)
-    my_map.plot(x, y, 'o')
+    for n in range(len(lons)):
+        folium.Marker([lats[n],
+                    lons[n]],
+                    popup = WSnames[n]).add_to(map_osm)
     ```
 
     ![stations](images/stations_map.png)
-    
-1. You can also alter the colour and style of your markers:
+
+1. You can also alter the colour and style of your markers by changing the `folium.Marker` options:
 
     ``` python
-    my_map.plot(x, y, 'ro', markersize=12)
+    for n in range(len(lons)):
+    	folium.Marker([lats[n],
+                   lons[n]],
+                   icon = folium.Icon(icon = 'cloud', color = 'green'),
+                   popup = WSnames[n]).add_to(map_osm)
     ```
 
-1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitude of the upper right and lower left corners. Here the map is centred on the UK, with additions and subtractions made to the centre position to position the corners.
+1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitude and the zoom level by adjusting the `map_ws` options. Here the map is centred on the UK.
 
 ``` python
-cc_lat = 55
-cc_lon = 0
-
-my_map = Basemap(projection='merc', lat_0 = cc_lat, lon_0 = cc_lon,
-                 resolution = 'h',
-                 llcrnrlon=cc_lon-15, llcrnrlat=cc_lat-7,
-                 urcrnrlon=cc_lon+5, urcrnrlat=cc_lat+5)
+map_ws = folium.Map(location=[54,-2], zoom_start=6)
 ```
 
 ![](images/uk_map.png)
@@ -236,4 +154,3 @@ my_map = Basemap(projection='merc', lat_0 = cc_lat, lon_0 = cc_lon,
 ## What Next
 
 Move on to [worksheet two](worksheet2.md) to learn how to plot weather data on your map.
-
