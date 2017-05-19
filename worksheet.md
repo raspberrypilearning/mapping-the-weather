@@ -28,6 +28,8 @@ You can then look at gathering some data from all the available Weather Stations
 
 For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather Station database, you can have a look over the resources - [Fetching the Weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the Weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
 
+1. This guide is written for a Raspberry Pi, but the code should also work on any computer that has Python3 installed. You can find out more about installing Python on differnet types of computer [here](https://wiki.python.org/moin/BeginnersGuide).
+
 1. Open a new Python shell by clicking on **Menu** > **Programming** > **Python 3 (IDLE)**. Then click **File** > **New File** to start a new script.
 
 1. To begin with you'll need to import a Python module. If you haven't installed it yet, you can find details on the [requirements page](https://www.raspberrypi.org/learning/mapping-the-weather/requirements).
@@ -38,6 +40,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     import json
     import folium
     import os
+    import webbrowser
     ```
 
 1. Here, `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `folium` is a tool for visualising data on maps in Python.
@@ -86,7 +89,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     ``` python
     lons = [station['weather_stn_long'] for station in stations['items']]
     lats = [station['weather_stn_lat'] for station in stations['items']]
-    wsnames = [station['weather_stn_name']] for station in stations['items']]
+    wsnames = [station['weather_stn_name'] for station in stations['items']]
     ```
 
 1. You can run your file now; you can have a look at all the weather station names by typing the following in the shell:
@@ -114,7 +117,7 @@ wsnames
     webbrowser.open_new('file://'+CWD+'/'+'wsmap1.html')
     ```
 
-1. Save and run your file, and a new browser window should open up, displaying a map of the globe. 
+1. Save and run your file, and a new browser window should open up, displaying a map of the globe.
 
 ![basic map](images/basic_map.png)
 
@@ -128,7 +131,7 @@ wsnames
     for n in range(len(lons)):
         folium.Marker([lats[n],
                     lons[n]],
-                    popup = WSnames[n]).add_to(map_osm)
+                    popup = wsnames[n]).add_to(map_osm)
     ```
 
     ![stations](images/stations_map.png)
@@ -140,7 +143,7 @@ wsnames
     	folium.Marker([lats[n],
                    lons[n]],
                    icon = folium.Icon(icon = 'cloud', color = 'green'),
-                   popup = WSnames[n]).add_to(map_osm)
+                   popup = wsnames[n]).add_to(map_ws)
     ```
 
 1. Lastly, if you want to focus on a specific part of the map, you can set the longitude and latitude and the zoom level by adjusting the `map_ws` options. Here the map is centred on the UK.
