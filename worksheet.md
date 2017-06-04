@@ -131,7 +131,7 @@ wsnames
     for n in range(len(lons)):
         folium.Marker([lats[n],
                     lons[n]],
-                    popup = wsnames[n]).add_to(map_osm)
+                    popup = wsnames[n]).add_to(map_ws)
     ```
 
     ![stations](images/stations_map.png)

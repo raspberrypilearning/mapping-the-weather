@@ -40,7 +40,8 @@
     tmin = 100.0
     lons = [data['weather_stn_long'] for data in station_data['items']]
     lats = [data['weather_stn_lat'] for data in station_data['items']]
-    for data in stations['items']:
+    wsnames = [station['weather_stn_name'] for station in station_data['items']]
+    for data in station_data['items']:
         if 'ambient_temp' in data:   
             t = data['ambient_temp']
             if t > 50 or t < -30:   
@@ -84,6 +85,7 @@ for n in range(len(lons)-1):
                         popup = wsnames[n]+':'+temps[n],
                         fill_color = hcol).add_to(map_ws)
 
+CWD = os.getcwd()
 map_ws.save('osm.html')
 webbrowser.open_new('file://'+CWD+'/'+'osm.html')
 ```
