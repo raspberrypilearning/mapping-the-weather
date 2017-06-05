@@ -70,7 +70,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi weather
     {'weather_stn_name': 'Pi Towers Demo', 'weather_stn_id': 255541, 'weather_stn_long': 0.110421, 'weather_stn_lat': 52.213842}
     ```
 
-1. This is the first record in the JSON data. As you can see, the station's longitude and latitude are within the dictionary. If you want to learn a little more about longitudes and latitudes, then have a look at the [second worksheet from this resource](https://www.raspberrypi.org/learning/fetching-the-weather/worksheet2). The longitude and latitude values are easy to access. For instance, to find out the longitude of the first station in the directory, type this into the shell:
+1. This is the first record in the JSON data. As you can see, the station's longitude and latitude are within the dictionary. If you want to learn a little more about longitudes and latitudes, then have a look at the [second worksheet of this resource](https://www.raspberrypi.org/learning/fetching-the-weather/worksheet2). The longitude and latitude values are easy to access. For instance, to find out the longitude of the first station in the directory, type this into the shell:
 
 
     ``` python
@@ -124,7 +124,7 @@ wsnames
 
 ## Plotting stations
 
-1. When you have the map the way you like it, you can add the locations of all the weather stations. These lines need to go **before** the `map_ws.save` line. When you click on a marker, it should show the name of the weather station.
+1. When you have the map looking the way you like it, you can add the locations of all the weather stations. These lines need to go **before** the `map_ws.save` line. When you click on a marker, it should show the name of the weather station.
 
 
     ``` python
