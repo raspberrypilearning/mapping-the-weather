@@ -1,9 +1,9 @@
-By learning how to map the weather, you will learn:
+By finding out how to map the weather, you will learn how to:
 
-- How to fetch data using a RESTful API
-- How to produce a variety of maps using the Python folium library
-- How to plot data points on a map
+- fetch data using a RESTful API
+- produce a variety of maps using the Python `folium` library
+- plot data points on a map
 
-This resource covers elements from the following strands of the [Raspberry Pi Digital Making Curriculum](https://www.raspberrypi.org/curriculum/):
+This resource covers elements from the following strand of the [Raspberry Pi Digital Making Curriculum](https://www.raspberrypi.org/curriculum/):
 
 - [Apply abstraction and decomposition to solve more complex problems](https://www.raspberrypi.org/curriculum/programming/developer)
