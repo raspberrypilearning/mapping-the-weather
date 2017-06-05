@@ -6,7 +6,7 @@ One thousand weather stations were sent out to schools all over the world at the
 
 Each weather station comes equipped with the sensors listed in the table below:
 
-|Sensor Name|Purpose - What does it measure?|
+|Sensor name|Purpose - What does it measure?|
 |-----------|-------|
 |Rain gauge|Volume of rain falling in millimetres|
 |Anemometer|Wind speed in kilometres per hour|
@@ -26,7 +26,7 @@ You can then look at gathering data from all the available weather stations and 
 
 ## Fetching the weather stations
 
-For greater detail on using JSON and the RESTful API of the Raspberry Pi weather station database, you can have a look over the resources [Fetching the weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
+If you want to know more about using JSON and the RESTful API of the Raspberry Pi weather station database, have a look over the resources [Fetching the weather](https://www.raspberrypi.org/learning/fetching-the-weather/) and [Graphing the weather](https://www.raspberrypi.org/learning/graphing-the-weather/).
 
 1. This guide is written for a Raspberry Pi, but the code should work on any computer that has Python 3 installed. You can find out more about installing Python on differnet types of computers [here](https://wiki.python.org/moin/BeginnersGuide).
 
@@ -57,7 +57,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi weather
     stations = get(url).json()
     ```
 
-1. Save and run this file to fetch the data. You can examine the data by typing the following into the Python shell:
+1. Save and run this file to fetch the data. You will be able to examine the data, for example by typing the following into the Python shell:
 
     ``` python
     stations['items'][0]
@@ -70,7 +70,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi weather
     {'weather_stn_name': 'Pi Towers Demo', 'weather_stn_id': 255541, 'weather_stn_long': 0.110421, 'weather_stn_lat': 52.213842}
     ```
 
-1. This is the first record in the JSON data. As you can see, the station's longitude and latitude are within the dictionary. If you want to learn a little more about longitudes and latitudes, then have a look at the [second worksheet of this resource](https://www.raspberrypi.org/learning/fetching-the-weather/worksheet2). The longitude and latitude values are easy to access. For instance, to find out the longitude of the first station in the directory, type this into the shell:
+1. This is the first record in the JSON data set. As you can see, the station's longitude and latitude are within the dictionary. If you want to learn a little more about longitudes and latitudes, have a look at the [second worksheet of this resource](https://www.raspberrypi.org/learning/fetching-the-weather/worksheet2). The longitude and latitude values are easy to access. For instance, to find out the longitude of the first station in the dictionary, type this into the shell:
 
 
     ``` python
