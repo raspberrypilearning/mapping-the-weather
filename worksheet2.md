@@ -7,11 +7,11 @@
 
     ``` python
     from requests import get
-    import json
-    from mpl_toolkits.basemap import Basemap
-    import matplotlib.pyplot as plt
+    import webbrowser
+    import folium
+    import os
     ```
-    
+
 1. This time, you're going to use a different URL to fetch the data. `getalllastmeasurement` will fetch data on all the Weather Stations, along with each one's last uploaded sensor reading.
 
 
@@ -32,124 +32,71 @@
     50.52, 'ambient_temp': 25.15}
     ```
 
-1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use different data, though, that's fine.
+1. For the purposes of this resource, you can extract the temperature data as well as the station longitudes and latitudes. If you wanted to use different data, though, that's fine. It is possible that some weather stations are not using all their sensors and may upload rows of records to the database that do not contain temperature readings. This would cause the list comprehensions you've used before to fail. Therefore you should use a slightly longer - but more resilient - method to fetch the records.
 
     ``` python
+    temps = []
+    tmax = 0.0
+    tmin = 100.0
     lons = [data['weather_stn_long'] for data in station_data['items']]
     lats = [data['weather_stn_lat'] for data in station_data['items']]
-    temps = [data['ambient_temp'] for data in station_data['items']]
+    wsnames = [station['weather_stn_name'] for station in station_data['items']]
+    for data in station_data['items']:
+        if 'ambient_temp' in data:   
+            t = data['ambient_temp']
+            if t > 50 or t < -30:   
+                t = 20
+            if t > tmax:
+                tmax = t
+            if t < tmin:
+                tmin = t
+            temps.append(str(t))
     ```
+The online database of weather measurements also contains some test data from when schools were setting up their weather stations. Some of these readings are not accurate, for example one temperature sensor was reporting values of -1000 degrees. That's colder than absolute zero!
+
+To ensure that these values are ignored the code above will also check for values less than -50 and greater than 50 degrees and set any readings that fall outside this range to an abitrary 20 degrees. One final step is to use two variables `tmax` and `tmin` to keep track of the maximum and minimum temperatures. This numbers can be used to create a colour scale so that the markers plotted on the map give a visual indication of the temperature they represent.
+
+## Defining a colour scale
+
+Add the `colourgrad` function immediately below the `import` declarations at the top of the file. This code takes a value and assigns a RGB colour based on the maximum and minimum temperature values. This is then converted into hexadecimal notation suitable for use with folium markers.
+
+```python
+def colourgrad(minimum, maximum, value):
+    minimum, maximum = float(minimum), float(maximum)
+    ratio = 2 * (value-minimum) / (maximum - minimum)
+    b = int(max(0, 255*(1 - ratio)))
+    g = int(max(0, 255*(ratio - 1)))
+    r = 255 - b - g
+    hexcolour = '#%02x%02x%02x' % (r,g,b)
+    return hexcolour
+```
+This map is going to display temperature values so the colour range will have blue for the coldest measurements and green for the hottest, with most of the mid-range temperatures being red. If you're plotting data from a different sensor you can hack this function to use the colours in a different way.
 
 ## Setting up the map
 
-You can set your map up in more or less the same way you did in [worksheet one](worksheet.md). The settings used below will focus on the UK, but you can adjust you `cc_lat` and `cc_lon` to your own liking. Trying to render the whole globe would cause your program to crash, though, as the Raspberry Pi does not have enough memory to accomplish such a task.
+You can set your map up in more or less the same way you did in [worksheet one](worksheet.md).
 
 ``` python
-cc_lat = 55
-cc_lon = 0
+map_ws = folium.Map(location=[0, 0], zoom_start=2)
+for n in range(len(lons)-1):
+    hcol = colourgrad(tmin, tmax, float(temps[n]))
+    folium.CircleMarker([lats[n], lons[n]],
+                        radius = 5,
+                        popup = wsnames[n]+':'+temps[n],
+                        fill_color = hcol).add_to(map_ws)
 
-my_map = Basemap(projection='merc', lat_0 = cc_lat, lon_0 = cc_lon,
-                 resolution = 'h' , area_thresh = 1,
-                 llcrnrlon=cc_lon-15, llcrnrlat=cc_lat-7,
-                 urcrnrlon=cc_lon+5, urcrnrlat=cc_lat+5)
-
-my_map.drawcoastlines()
-my_map.drawcountries()
-
-my_map.drawmapboundary()
-my_map.bluemarble()
+CWD = os.getcwd()
+map_ws.save('osm.html')
+webbrowser.open_new('file://'+CWD+'/'+'osm.html')
 ```
-
-## Zipping in Python
-
-Rather than plot the points in one go, this time you're going to use a loop to plot each point and then add a label to it. To do this, it is helpful to use Python's inbuilt `zip` function. To understand how `zip` works, you can play around a little in the shell.
-
-1. In the shell, type the following lines to create three different lists:
-
-    ``` python
-    pets = ['cat', 'dog', 'rabbit']
-    names = ['fluffy', 'spot', 'bugs']
-    ages = ['3', '6', '2']
-    ```
-
-1. Now imagine you wanted to print out the pets' types, names, and ages, grouping them all together. You could write code that looks like this:
-
-    ``` python
-    for i in range(len(pets)):
-        print(pets[i], names[i], ages[i])
-    ```
-
-    However, Python has a special function called `zip` that creates a new object which can be iterated over using a `for` loop. Try writing this in the shell:
-
-
-    ``` python
-    for i in zip(pets, names, ages):
-        print(i)
-    ```
-
-    Here, `zip` groups the zeroth item of each list, then the first item of each list, then the second, and so on.
-    
-You can now use `zip` in your code to combine the longitudes, latitudes, and temperatures.
-
-## Plotting stations and temperatures
-
-You only need to plot the Weather Stations that are going to be visible on your map.
-
-1. Start by using a `for` loop to iterate over the zipped data.
-
-    ``` python
-    for lon, lat, temp in zip(lons, lats, temps):
-    ```
-
-1. Let's just get the Weather Stations within the longitudes and latitudes your map will cover.
-                 llcrnrlon=cc_lon-15, llcrnrlat=cc_lat-7,
-                 urcrnrlon=cc_lon+5, urcrnrlat=cc_lat+5)
-	```python
-		if lon => cc_lon-15 and lon =< cc_lon+5 and lat => cc_lat-7 and lat =< cc_lat+5:
-	```
-
-1. Into this `for` loop, you set the positions of each station.
-
-
-    ``` python
-        x,y = my_map(lon, lat)
-    ```
-
-1. Then you can plot the stations. This time you can set the colour using a tuple. Matplotlib uses a tuple of values for red, green, and blue, with each value being between 0 and 1.
-
-    ``` python
-        my_map.plot(x, y, 'o', markersize=10, color=(0,0,1))
-    ```
-
-1. To finish off, you can plot the temperatures with the stations. Here they are plotted in white text, with a `right` horizontal alignment and a `bottom` vertical alignment.
-
-    ``` python
-        plt.text(x, y, temp, color = 'w', ha='right',va='bottom')
-    ```
-
-1. Then all you need to do is display the plot.
-
-    ``` python
-    plt.show()
-    ```
-
-1. The last part of your code should now look like this:
-
-```python
-for lon, lat, temp in zip(lons, lats, temps):
-    if lon >= cc_lon-15 and lon <= cc_lon+5 and lat >= cc_lat-7 and lat <= cc_lat+5:
-        x,y = my_map(lon, lat)
-        my_map.plot(x, y, 'o', markersize=10, color=(0,0,1))
-        plt.text(x, y, temp, color = 'w', ha='right',va='bottom')
-```
+The main difference is that a custom circular marker is used to allow colours to represent different temperatures.
 
 1. Run your code and you should see your map.
 
-![uk](images/uk_temp.png)
+![uk](images/temp_map.png)
 
 ## What Next
 
-Why not try and plot some other sensor data, like rainfall? 
+Why not try and plot some other sensor data, like rainfall?
 
-There is a lot more functionality in Matplotlib and Basemap that you could explore. You could, for example, try and colour the plot points depending on the temperature.
-
+There is a lot more functionality in folium that you could explore. You could, for example, try and use a choropleth map to display weather station data based on regions.

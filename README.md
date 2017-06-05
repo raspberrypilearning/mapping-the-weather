@@ -2,7 +2,7 @@
 
 ![](cover.png)
 
-In this resource you will learn how to fetch weather station data from the Raspberry Pi Weather Station database, and plot that data onto a graphical map using Matplotlib.
+In this resource you will learn how to fetch weather station data from the Raspberry Pi Weather Station database, and plot that data onto a graphical map.
 
 ## Licence
 
