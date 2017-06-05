@@ -43,7 +43,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi weather
     import webbrowser
     ```
 
-1. Here, `requests` is used to fetch the JSON data from the database, and `json` is used to process JSON data. `folium` is a tool for visualising data on maps in Python.
+1. Here, `requests` is used to fetch the JSON data from the database, and `json` to process JSON data. `folium` is a tool for visualising data on maps in Python.
 
 1. Next, the URL for the RESTful API needs to be stored as a string in your program.
 
@@ -109,7 +109,7 @@ wsnames
 
 1. This creates a map centred at latitude 0, longitude 0.
 
-1. Save your map into a local html file and then open it using a web browser. Python's `os` library is used to discover the Current Working Directory (CWD) so that the browser knows from where to load the saved map file.
+1. Save your map as a local html file and open it using a web browser. Python's `os` library is used to discover the Current Working Directory (CWD) so that the browser knows from where to load the saved map file.
 
     ``` python
     CWD = os.getcwd()
