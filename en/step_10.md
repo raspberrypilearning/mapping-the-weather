@@ -1,16 +1,23 @@
-## Defining a colour scale
+## Setting up the map
 
-Add the `colourgrad` function immediately below the `import` declarations at the top of the file. This function takes a value and assigns a RGB colour to it depending on the maximum and minimum temperature values. The RGB colour is converted into hexadecimal notation suitable for use with `folium` markers.
+You can set your map up in more or less the same way as in [worksheet 1](worksheet.md).
 
-```python
-def colourgrad(minimum, maximum, value):
-    minimum, maximum = float(minimum), float(maximum)
-    ratio = 2 * (value-minimum) / (maximum - minimum)
-    b = int(max(0, 255*(1 - ratio)))
-    g = int(max(0, 255*(ratio - 1)))
-    r = 255 - b - g
-    hexcolour = '#%02x%02x%02x' % (r,g,b)
-    return hexcolour
+``` python
+map_ws = folium.Map(location=[0, 0], zoom_start=2)
+for n in range(len(lons)-1):
+    hcol = colourgrad(tmin, tmax, float(temps[n]))
+    folium.CircleMarker([lats[n], lons[n]],
+                        radius = 5,
+                        popup = wsnames[n]+':'+temps[n],
+                        fill_color = hcol).add_to(map_ws)
+
+CWD = os.getcwd()
+map_ws.save('osm.html')
+webbrowser.open_new('file://'+CWD+'/'+'osm.html')
 ```
-Our map is going to display temperature values, so we're setting the colour range to blue for the coldest measurements and green for the hottest, with most of the mid-range temperatures plotted in red. If you're visualising data from a different sensor, you can hack the `colourgrad` function to use colours in a different way.
+The main difference is that a custom circular marker is used to allow colours to represent different temperatures.
+
+- Run your code and you should see your map.
+
+![uk](images/temp_map.png)
 

@@ -19,7 +19,6 @@ steps:
 - title: Fetching the weather stations
 - title: Creating a map
 - title: Plotting stations
-- title: What Next
 - title: Mapping the Weather
 - title: Getting station and weather data
 - title: Defining a colour scale
