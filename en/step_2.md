@@ -1,7 +1,5 @@
 ## What you will need
 
-
-
 ### Software
 
 #### Software Installation

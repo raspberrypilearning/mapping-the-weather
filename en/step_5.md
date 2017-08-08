@@ -1,6 +1,5 @@
 ## Creating a map
 
-
 - The first thing to do is to set up your map.
 
     ``` python
