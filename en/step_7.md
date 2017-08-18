@@ -1,7 +1,7 @@
 ## Getting station and weather data
 
 - Create a new Python file by clicking **File** > **New File**.
-- Then use the same imports that you used in [worksheet 1](worksheet.md).
+- Then use the same imports that you used before
 
     ``` python
     from requests import get
@@ -53,4 +53,3 @@
 The online database of weather measurements also contains test data from when schools set up their stations. Some of these readings are not accurate - for example, one temperature sensor was reporting values of -1000 degrees. That's colder than absolute zero!
 
 To ensure that these values are ignored, the code above will also check for values less than -30 and greater than 50 degrees and set any readings that fall outside this range to an abitrary 20 degrees. The final step is to use the variables `tmax` and `tmin` to keep track of the maximum and minimum recorded temperatures. These values will be used to create a colour scale so that the markers plotted on the map give a visual indication of the temperature they represent.
-
