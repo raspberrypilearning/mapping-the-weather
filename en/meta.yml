@@ -3,7 +3,7 @@ title: Mapping the Weather
 hero_image: images/banner.png
 description: Use Matplotlib to visualise weather stations around the world
 original_url: https://raspberrypi.org/learning/mapping-the-weather
-theme: red
+theme: blue
 duration: 2
 listed: true
 ingredient: false
