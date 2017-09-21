@@ -10,6 +10,7 @@
     import webbrowser
     import folium
     import os
+    import html
     ```
 
 1. This time, you'll fetch the data with a different URL. `getalllastmeasurement` will fetch data regarding all the weather stations, along with each station's last uploaded sensor reading.
@@ -40,7 +41,7 @@
     tmin = 100.0
     lons = [data['weather_stn_long'] for data in station_data['items']]
     lats = [data['weather_stn_lat'] for data in station_data['items']]
-    wsnames = [station['weather_stn_name'] for station in station_data['items']]
+    wsnames = [html.escape(station['weather_stn_name'] ) for station in station_data['items']]
     for data in station_data['items']:
         if 'ambient_temp' in data:   
             t = data['ambient_temp']
