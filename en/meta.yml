@@ -1,0 +1,26 @@
+---
+title: Mapping the Weather
+hero_image: images/banner.png
+description: Use the folium library to visualise weather stations around the world
+original_url: https://raspberrypi.org/learning/mapping-the-weather
+theme: blue
+duration: 2
+listed: true
+ingredient: false
+copyedit: true
+curriculum: creator, design-0, programming-0, phys-comp-0, manufacture-0, community-0
+interests: nature/outside/weather
+technologies: python
+site_areas: ''
+steps:
+- title: Introduction
+- title: What you will need
+- title: Mapping the Weather
+- title: Fetching the weather stations
+- title: Creating a map
+- title: Plotting stations
+- title: Getting station and weather data
+- title: Defining a colour scale
+- title: Setting up the map
+- title: What Next
+
