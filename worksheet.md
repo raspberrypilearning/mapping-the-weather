@@ -41,6 +41,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     import folium
     import os
     import webbrowser
+    import html
     ```
 
 1. Here, `requests` is used to fetch the json data from the database, `json` is used to process JSON data. `folium` is a tool for visualising data on maps in Python.
@@ -84,12 +85,12 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     stations['items'][5]['weather_stn_long']
     ```
 
-1. Three list comprehensions can be used in your Python file to fetch all the longitude and latitude values along with the names of the weather stations. These iterate over the JSON data and extract each of the longitudes, latitudes and names and place them in separate lists.
+1. Three list comprehensions can be used in your Python file to fetch all the longitude and latitude values along with the names of the weather stations. These iterate over the JSON data and extract each of the longitudes, latitudes and names and place them in separate lists. When school's register their weather stations, they can use characters that may cause problems when used within HTML tags, so we need to *escape* this string to make sureour final map page loads and displays correctly.  
 
     ``` python
     lons = [station['weather_stn_long'] for station in stations['items']]
     lats = [station['weather_stn_lat'] for station in stations['items']]
-    wsnames = [station['weather_stn_name'] for station in stations['items']]
+    wsnames = [html.escape(station['weather_stn_name'] ) for station in stations['items']]
     ```
 
 1. You can run your file now; you can have a look at all the weather station names by typing the following in the shell:

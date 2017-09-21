@@ -1,33 +1,47 @@
 from requests import get
-import json
-from mpl_toolkits.basemap import Basemap
-import matplotlib.pyplot as plt
+import webbrowser
+import folium
+import os
+import html
+
+def colourgrad(minimum, maximum, value):
+    minimum, maximum = float(minimum), float(maximum)
+    ratio = 2 * (value-minimum) / (maximum - minimum)
+    b = int(max(0, 255*(1 - ratio)))
+    g = int(max(0, 255*(ratio - 1)))
+    r = 255 - b - g
+    hexcolour = '#%02x%02x%02x' % (r,g,b)
+    return hexcolour
 
 url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getalllastmeasurement'
 
 station_data = get(url).json()
 
-print('got data')
+temps = []
+tmax = 0.0
+tmin = 100.0
 lons = [data['weather_stn_long'] for data in station_data['items']]
 lats = [data['weather_stn_lat'] for data in station_data['items']]
-temps = [data['ambient_temp'] for data in station_data['items']]
-print('processed data')
-cc_lat = 55
-cc_lon = 0
+wsnames = [html.escape(station['weather_stn_name'] ) for station in station_data['items']]
+for data in station_data['items']:
+    if 'ambient_temp' in data:
+        t = data['ambient_temp']
+        if t > 50 or t < -30:
+            t = 20
+        if t > tmax:
+            tmax = t
+        if t < tmin:
+            tmin = t
+        temps.append(str(t))
 
-my_map = Basemap(projection='robin', lat_0 = cc_lat, lon_0 = cc_lon,
-                 resolution = 'l')
-print('map created')
-my_map.drawcoastlines()
-my_map.drawcountries()
+map_ws = folium.Map(location=[0, 0], zoom_start=2)
+for n in range(len(lons)-1):
+    hcol = colourgrad(tmin, tmax, float(temps[n]))
+    folium.CircleMarker([lats[n], lons[n]],
+                        radius = 5,
+                        popup = wsnames[n]+':'+temps[n],
+                        fill_color = hcol).add_to(map_ws)
 
-my_map.drawmapboundary()
-my_map.bluemarble()
-
-print('Starting zip')
-for lon, lat, temp in zip(lons, lats, temps):
-    x,y = my_map(lon, lat)
-    my_map.plot(x, y, 'o', markersize=10, color=(0,0,1))
-    plt.text(x, y, temp, color = 'w', ha='right',va='bottom')
-print('ending zip')
-plt.show()
+CWD = os.getcwd()
+map_ws.save('osm.html')
+webbrowser.open_new('file://'+CWD+'/'+'osm.html')

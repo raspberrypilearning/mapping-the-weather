@@ -2,6 +2,7 @@ from requests import get
 import webbrowser
 import folium
 import os
+import html
 
 CWD = os.getcwd()
 
@@ -24,7 +25,7 @@ tmin = 100.0
 print('Downloading data')
 lons = [station['weather_stn_long'] for station in stations['items']]
 lats = [station['weather_stn_lat'] for station in stations['items']]
-WSnames = [station['weather_stn_name'] for station in stations['items']]
+WSnames = [html.escape(station['weather_stn_name'] ) for station in stations['items']]
 for data in stations['items']:
     # if data['weather_stn_id'] != 1002485:
     if 'ambient_temp' in data:   # check value isn't missing
