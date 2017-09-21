@@ -85,7 +85,7 @@ For greater detail on using JSON and the RESTful API of the Raspberry Pi Weather
     stations['items'][5]['weather_stn_long']
     ```
 
-1. Three list comprehensions can be used in your Python file to fetch all the longitude and latitude values along with the names of the weather stations. These iterate over the JSON data and extract each of the longitudes, latitudes and names and place them in separate lists. When school's register their weather station names, they can use characters, especially punctuation like apostrophes, that may cause problems when used within HTML tags. Converting these characters to a safe format is called *escaping* and the Python html library has a handy function for just this job. 
+1. Three list comprehensions can be used in your Python file to fetch all the longitude and latitude values along with the names of the weather stations. These iterate over the JSON data and extract each of the longitudes, latitudes and names and place them in separate lists. When school's register their weather station names, they can use characters, especially punctuation like apostrophes, that may cause problems when used within HTML tags. Converting these characters to a safe format is called *escaping*, and the Python html library has a handy function for just this job. 
 
     ``` python
     lons = [station['weather_stn_long'] for station in stations['items']]
