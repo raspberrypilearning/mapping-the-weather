@@ -1,16 +1,16 @@
 ---
 title: Mapping the Weather
 hero_image: images/banner.png
-description: Use Matplotlib to visualise weather stations around the world
+description: Use the folium library to visualise weather stations around the world
 original_url: https://raspberrypi.org/learning/mapping-the-weather
-theme: red
+theme: blue
 duration: 2
 listed: true
 ingredient: false
 copyedit: true
 curriculum: creator, design-0, programming-0, phys-comp-0, manufacture-0, community-0
-interests: ''
-technologies: rpi, physical computing, python
+interests: nature/outside/weather
+technologies: python
 site_areas: ''
 steps:
 - title: Introduction
