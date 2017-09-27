@@ -41,7 +41,8 @@
     tmin = 100.0
     lons = [data['weather_stn_long'] for data in station_data['items']]
     lats = [data['weather_stn_lat'] for data in station_data['items']]
-    wsnames = [html.escape(station['weather_stn_name'] ) for station in station_data['items']]
+    wsnames = [html.escape(station['weather_stn_name']) for station in stations['items']]
+
     for data in station_data['items']:
         if 'ambient_temp' in data:   
             t = data['ambient_temp']
