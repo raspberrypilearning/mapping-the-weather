@@ -15,6 +15,7 @@ If you want to know more about using JSON and the RESTful API of the Raspberry P
     import folium
     import os
     import webbrowser
+    import html
     ```
 
 - Here, `requests` is used to fetch the JSON data from the database, and `json` to process JSON data. `folium` is a tool for visualising data on maps in Python.
@@ -63,7 +64,7 @@ If you want to know more about using JSON and the RESTful API of the Raspberry P
     ``` python
     lons = [station['weather_stn_long'] for station in stations['items']]
     lats = [station['weather_stn_lat'] for station in stations['items']]
-    wsnames = [station['weather_stn_name'] for station in stations['items']]
+    wsnames = [html.escape(station['weather_stn_name']) for station in stations['items']]
     ```
 
 - Now run your file. You can have a look at all the weather station names by typing the following into the shell:
@@ -71,4 +72,3 @@ If you want to know more about using JSON and the RESTful API of the Raspberry P
 ``` python
 wsnames
 ```
-
