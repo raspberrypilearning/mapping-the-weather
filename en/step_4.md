@@ -6,8 +6,6 @@ If you want to know more about using JSON and the RESTful API of the Raspberry P
 
 - Open a new Python shell by clicking on **Menu** > **Programming** > **Python 3 (IDLE)**. Then click **File** > **New File** to start a new script.
 
-- To begin, you'll need to import a Python module. If you haven't installed it yet, you can find details on the [requirements page](https://projects.raspberrypi.org/en/projects/mapping-the-weather/requirements).
-
 
     ``` python
     from requests import get
