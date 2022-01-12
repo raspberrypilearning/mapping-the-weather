@@ -16,9 +16,10 @@ hardware: ''
 software: python
 version: 3
 last_tested: 2017-01-01
-steps: 
+steps:
 - title: Introduction
 - title: What you will need
+  completion: engaged
 - title: Mapping the Weather
 - title: Fetching the weather stations
 - title: Creating a map
@@ -26,4 +27,5 @@ steps:
 - title: Getting station and weather data
 - title: Defining a colour scale
 - title: Setting up the map
+  completion: internal
 - title: What Next
