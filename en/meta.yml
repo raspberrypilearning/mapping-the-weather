@@ -19,13 +19,15 @@ last_tested: 2017-01-01
 steps:
 - title: Introduction
 - title: What you will need
-  completion: engaged
 - title: Mapping the Weather
 - title: Fetching the weather stations
+  completion:
+  - engaged
 - title: Creating a map
 - title: Plotting stations
 - title: Getting station and weather data
 - title: Defining a colour scale
 - title: Setting up the map
-  completion: internal
+  completion:
+  - internal
 - title: What Next
